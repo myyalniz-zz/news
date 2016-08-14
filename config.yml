@@ -1,0 +1,4 @@
+zip_files_url: 'http://bitly.com/nuvi-plz'
+zip_temp_extract_location: '/tmp/news'
+debug: false
+
