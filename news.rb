@@ -104,12 +104,11 @@ def process_zip_file(zip_temp_extract_location, zip_file, redis_list_name)
 	
 end
 
-# The main entry point
+# Process recursivelly all of the zip files on site html
 zip_names.each { |zip_name| 
-
     # zip_name is an array with only 1 element
     zip_base_name = zip_name[0]
-    puts zip_base_name.to_s
+    puts "Processing " + zip_base_name.to_s
     File.write(config['zip_temp_extract_location'] + "/" + zip_base_name.to_s, \
 	       Net::HTTP.get(URI.parse(zip_base_url.to_s + zip_base_name.to_s )))
 
@@ -117,5 +116,4 @@ zip_names.each { |zip_name|
 
     # Remove zip file after processing
     File.delete(config['zip_temp_extract_location'] + "/" + zip_base_name.to_s)
-
 }
