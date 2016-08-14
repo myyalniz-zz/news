@@ -8,5 +8,5 @@ The topic_url is assumed to be a unique for the xml content so it is used to see
 
 To achieve this, the topic_url is stored as member of set where domain is extracted to be used as a key. The code checks if topic_url is a member of set and if it is the xml content is not inserted in the list.
 
-config.yml is the configuration file for code. You can customize the url, local tmp location and debugging using this yml file.
+config.yml is the configuration file for code. You can customize the url, local tmp location, redis connection info and debugging using this yml file.
 
