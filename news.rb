@@ -25,7 +25,7 @@ end
 @debug = config['debug']
 
 # Initializing redis
-@redis_obj = Redis.new(:host => config['redis_url'], :port => config['redis_port'])
+@redis_obj = Redis.new(host: config['redis_url'], port: config['redis_port'])
 
 # We assume, we know the structure and there is only one href in bitly.com body
 # This is the base location for zip files 
