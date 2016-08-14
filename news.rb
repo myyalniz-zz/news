@@ -57,11 +57,11 @@ def place_in_redis(xml_file, redis_list_name)
 	@set = Redis::Set.new(domain.to_s)
 	if @set.member? topic_url.to_s
 	    puts "Topic listed in " + topic_url.to_s + " is already stored" if @debug
-  	    puts "Skip processing : #{xml_file}..."
+  	    puts "Skip processing : " + xml_file + "..."
 	else 
 	    puts "Topic listed in " + topic_url.to_s + " has NOT been stored. Processing..." if @debug 
  	    @redis_obj.lpush("NEWS_XML", xml_content)
-  	    puts "New xml content : #{xml_file}..."
+  	    puts "New xml content : " + xml_file + "..."
 	    @set << topic_url.to_s
 	end
 	
