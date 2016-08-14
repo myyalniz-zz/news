@@ -1,2 +1,1 @@
-gem 'redis-objects'
 gem 'rubyzip'
