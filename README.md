@@ -10,3 +10,6 @@ To achieve this, the topic_url is stored as member of set where domain is extrac
 
 config.yml is the configuration file for code. You can customize the url, local tmp location, redis connection info and debugging using this yml file.
 
+execute news.rb
+
+
