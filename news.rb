@@ -7,7 +7,6 @@ require 'net/http'
 require 'yaml'
 require 'fileutils'
 require 'zip'
-require 'redis-objects'
 require 'redis'
 
 config = YAML.load_file('config.yml')
@@ -26,7 +25,6 @@ end
 @debug = config['debug']
 
 # Initializing redis
-Redis.current = Redis.new(:host => '127.0.0.1', :port => 6379)
 @redis_obj = Redis.new(:host => '127.0.0.1', :port => 6379)
 
 # We assume, we know the structure and there is only one href in bitly.com body
@@ -54,15 +52,14 @@ def place_in_redis(xml_file, redis_list_name)
     if ! topic_url.nil?
     	domain = topic_url.scan(/http.?\:\/\/([^\/]+)\/?.*/)[0][0]
 
-	@set = Redis::Set.new(domain.to_s)
-	if @set.member? topic_url.to_s
+	if @redis_obj.sismember(domain.to_s, topic_url.to_s)
 	    puts "Topic listed in " + topic_url.to_s + " is already stored" if @debug
   	    puts "Skip processing : " + xml_file + "..."
 	else 
 	    puts "Topic listed in " + topic_url.to_s + " has NOT been stored. Processing..." if @debug 
  	    @redis_obj.lpush("NEWS_XML", xml_content)
   	    puts "New xml content : " + xml_file + "..."
-	    @set << topic_url.to_s
+	    @redis_obj.sadd(domain.to_s, topic_url.to_s)
 	end
 	
     else
